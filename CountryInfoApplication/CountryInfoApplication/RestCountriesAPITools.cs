@@ -9,7 +9,7 @@ namespace CountryInfoApplication
 {
     class RestCountriesAPITools
     {
-        public static List<string> GetInfoCountry(string country)
+        public List<string> GetCountryInfo(string country)
         {
             WebRequest request = WebRequest.Create("https://restcountries.eu/rest/v2/name/" + country);
 
