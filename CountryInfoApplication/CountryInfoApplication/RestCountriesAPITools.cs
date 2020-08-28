@@ -32,7 +32,6 @@ namespace CountryInfoApplication
                 }
             }
 
-
             return result;
         }
     }
