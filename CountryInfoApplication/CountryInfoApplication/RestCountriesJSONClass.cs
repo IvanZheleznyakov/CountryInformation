@@ -33,15 +33,7 @@ namespace CountryInfoApplication
         public string Fa { get; set; }
     }
 
-    public class RegionalBloc
-    {
-        public string Acronym { get; set; }
-        public string Name { get; set; }
-        public List<string> OtherAcronyms { get; set; }
-        public List<object> OtherNames { get; set; }
-    }
-
-    public class RestCountriesJSONClass
+    public class ArrayOfJSON
     {
         public string Name { get; set; }
         public List<string> TopLevelDomain { get; set; }
@@ -56,7 +48,7 @@ namespace CountryInfoApplication
         public List<double> Latlng { get; set; }
         public string Demonym { get; set; }
         public double Area { get; set; }
-        public double Gini { get; set; }
+        public double? Gini { get; set; }
         public List<string> Timezones { get; set; }
         public List<string> Borders { get; set; }
         public string NativeName { get; set; }
@@ -65,7 +57,12 @@ namespace CountryInfoApplication
         public List<Language> Languages { get; set; }
         public Translations Translations { get; set; }
         public string Flag { get; set; }
-        public List<RegionalBloc> RegionalBlocs { get; set; }
+        public List<object> RegionalBlocs { get; set; }
         public string Cioc { get; set; }
+    }
+
+    public class RestCountriesJSONClass
+    {
+        public List<ArrayOfJSON> ArrayOfJSON { get; set; }
     }
 }

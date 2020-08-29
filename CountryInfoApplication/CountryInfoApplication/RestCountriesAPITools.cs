@@ -8,11 +8,11 @@ using System.Text;
 
 namespace CountryInfoApplication
 {
-    class RestCountriesAPITools
+    public class RestCountriesAPITools
     {
         public List<string> GetCountryInfo(string country)
         {
-            WebRequest request = WebRequest.Create("https://restcountries.eu/rest/v2/name/" + country);
+            WebRequest request = WebRequest.Create("https://restcountries.eu/rest/v2/name/" + country + "?fullText=true");
 
             List<string> result = new List<string>();
 
@@ -33,15 +33,13 @@ namespace CountryInfoApplication
                 string myJsonResponse;
                 if ((myJsonResponse = stream.ReadLine()) != null)
                 {
-                    myJsonResponse = myJsonResponse.Remove(0, 1);
-                    myJsonResponse = myJsonResponse.Remove(myJsonResponse.Length - 1, 1);
-                    RestCountriesJSONClass myDeserializedClass = JsonConvert.DeserializeObject<RestCountriesJSONClass>(myJsonResponse);
-                    result.Add(myDeserializedClass.Name);
-                    result.Add(myDeserializedClass.Alpha2Code);
-                    result.Add(myDeserializedClass.Capital);
-                    result.Add(myDeserializedClass.Area.ToString());
-                    result.Add(myDeserializedClass.Population.ToString());
-                    result.Add(myDeserializedClass.Region);
+                    var myDeserializedClass = JsonConvert.DeserializeObject<List<ArrayOfJSON>>(myJsonResponse);
+                    result.Add(myDeserializedClass[0].Name);
+                    result.Add(myDeserializedClass[0].Alpha2Code);
+                    result.Add(myDeserializedClass[0].Capital);
+                    result.Add(myDeserializedClass[0].Area.ToString());
+                    result.Add(myDeserializedClass[0].Population.ToString());
+                    result.Add(myDeserializedClass[0].Region);
                 }
             }
 

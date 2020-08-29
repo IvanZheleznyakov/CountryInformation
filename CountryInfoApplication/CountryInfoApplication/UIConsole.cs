@@ -5,11 +5,11 @@ using System.Text;
 
 namespace CountryInfoApplication
 {
-    class UIConsole
+    public class UIConsole
     {
         private void PrintDividingLine()
         {
-            Console.WriteLine("================================================================================================================");
+            Console.WriteLine("===================================================================================================================");
         }
 
         private void PrintMenu()
@@ -31,13 +31,14 @@ namespace CountryInfoApplication
 
         private void PrintNameOfColumns()
         {
-            Console.WriteLine("{0,30}   |{1,10}   |{2,10}   |{3,10}   |{4,10}   |{5,10}", "Название", "Код страны", "Столица", "Площадь", "Население", "Регион");
+            PrintDividingLine();
+            Console.WriteLine("{0,30}   |{1,10}   |{2,25}   |{3,10}   |{4,10}   |{5,10}", "Название", "Код страны", "Столица", "Площадь", "Население", "Регион");
             PrintDividingLine();
         }
 
         private void PrintCountryInfo(List<string> countryInfo)
         {
-            Console.WriteLine("{0,30}   |{1,10}   |{2,10}   |{3,10}   |{4,10}   |{5,10}", countryInfo[0], countryInfo[1], countryInfo[2], countryInfo[3], countryInfo[4], countryInfo[5]);
+            Console.WriteLine("{0,30}   |{1,10}   |{2,25}   |{3,10}   |{4,10}   |{5,10}", countryInfo[0], countryInfo[1], countryInfo[2], countryInfo[3], countryInfo[4], countryInfo[5]);
         }
 
         private void PrintRecordsFromDataBase(List<List<string>> recordsFromDatabase)
@@ -57,7 +58,9 @@ namespace CountryInfoApplication
                 return;
             }
 
+            PrintDividingLine();
             Console.WriteLine("Подключение с базой данных открыто. Можете начинать работу.");
+            PrintDividingLine();
 
             var apiTools = new RestCountriesAPITools();
 
@@ -77,7 +80,7 @@ namespace CountryInfoApplication
                 switch (operation)
                 {
                     case 1:
-                        Console.Write("Введите название страны на латинице: ");
+                        Console.Write("Введите полное название страны на латинице (например, Russian Federation вместо Russia): ");
                         string country = Console.ReadLine();
 
                         List<string> countryInfo = apiTools.GetCountryInfo(country);
@@ -85,13 +88,15 @@ namespace CountryInfoApplication
                         if (countryInfo.Count == 0)
                         {
                             PrintDividingLine();
-                            Console.WriteLine("Страна с таким названием не найдена, или, возможно, какая-то проблема с API RestCountries.");
+                            Console.WriteLine("Страна с таким названием не найдена, или, возможно, какая-то проблема с API RestCountries. \n" +
+                                "Напоминание: API работает с полным названием страны (например, Russian Federation вместо Russia).");
                             PrintDividingLine();
                         }
                         else
                         {
                             PrintNameOfColumns();
                             PrintCountryInfo(countryInfo);
+                            PrintDividingLine();
 
                             int saveData;
                             PrintSaveDataRequest();
@@ -107,9 +112,11 @@ namespace CountryInfoApplication
                             if (saveData == 1)
                             {
                                 databaseTools.AddCountryInfoToDatabase(countryInfo[0], countryInfo[1], countryInfo[2], countryInfo[3], countryInfo[4], countryInfo[5]);
+                                PrintDividingLine();
+                                Console.WriteLine("Информация о стране " + countryInfo[0] + " успешно добавлена.");
+                                PrintDividingLine();
                             }
                         }
-
                         break;
                     case 2:
                         List<List<string>> recordsFromDataBase = databaseTools.GetRecordsFromDatabase();
@@ -123,6 +130,7 @@ namespace CountryInfoApplication
                         {
                             PrintNameOfColumns();
                             PrintRecordsFromDataBase(recordsFromDataBase);
+                            PrintDividingLine();
                         }
                         break;
                     case 0:

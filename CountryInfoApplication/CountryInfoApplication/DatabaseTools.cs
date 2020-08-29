@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CountryInfoApplication
 {
-    class DatabaseTools
+    public class DatabaseTools
     {
         private SqlConnection connection;
         public bool ConnectToSQLServer()
@@ -64,6 +64,13 @@ namespace CountryInfoApplication
             object idRegion = null;
 
             AddRecordToSingleTable(tableNameRegion, region, ref idRegion);
+
+            if (name.Contains("'") || name.Contains("(") || name.Contains(")"))
+            {
+                name = name.Replace("'", "");
+                name = name.Replace("(", "");
+                name = name.Replace(")", "");
+            }
 
             string sqlSelectCountryCode = "SELECT Countries.Id FROM Countries WHERE Countries.CountryCode = '" + countryCode + "'";
 
