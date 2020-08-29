@@ -74,7 +74,7 @@ namespace CountryInfoApplication
                             ShowCountryInfo(countryInfo);
                         }
 
-                        int saveData = 0;
+                        int saveData;
                         while (!Int32.TryParse(Console.ReadLine(), out saveData) && (saveData != 0 || saveData != 1))
                         {
                             Console.WriteLine("Такой операции нет. Введите целое число - номер операции. \n");
@@ -83,7 +83,7 @@ namespace CountryInfoApplication
 
                         if (saveData == 1)
                         {
-                            
+                            databaseTools.AddCountryInfoToDatabase(countryInfo[0], countryInfo[1], countryInfo[2], countryInfo[3], countryInfo[4], countryInfo[5]);
                         }
 
                         break;
@@ -95,27 +95,6 @@ namespace CountryInfoApplication
                         Console.WriteLine("Данной операции нет в списке. Попробуйте еще раз. \n");
                         break;
                 }
-
-                string eur = "europe";
-                string afc = "afc";
-                string sqlExpr = "select Regions.Id from Regions where Regions.Name = '" + eur + "'";
-
-                SqlCommand command = new SqlCommand(sqlExpr, connection);
-                SqlDataReader reader = command.ExecuteReader();
-
-                if (reader.HasRows)
-                {
-                    Console.WriteLine("{0}", reader.GetName(0));
-
-                    while (reader.Read())
-                    {
-                        object id = reader.GetValue(0);
-
-                        Console.WriteLine("{0}", id);
-                    }
-                }
-
-                reader.Close();
             }
 
             Console.WriteLine("Подключение закрыто...");

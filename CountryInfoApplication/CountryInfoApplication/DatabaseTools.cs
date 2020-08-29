@@ -29,59 +29,73 @@ namespace CountryInfoApplication
             return true;
         }
 
-        public void AddCountryInfoToDatabase(string name, string countryCode, string capital, string area, string population, string region)
+        private void AddRecordToSingleTable(string tableName, string record, ref object id)
         {
-            string sqlSelectCapital = "SELECT Capitals.Id FROM Capitals WHERE Capitals.Name = '" + capital + "'";
-            object idCapital = null;
+            string sqlSelectQuery = "SELECT" + tableName + ".Id FROM " + tableName + " WHERE " + tableName + ".Name = '" + record + "'";
 
-            SqlCommand command = new SqlCommand(sqlSelectCapital, connection);
+            SqlCommand command = new SqlCommand(sqlSelectQuery, connection);
             SqlDataReader reader = command.ExecuteReader();
 
             if (!reader.HasRows)
             {
                 reader.Close();
-                string sqlInsertNewCapital = "INSERT Capitals VALUES ('" + capital + "')";
-                command = new SqlCommand(sqlInsertNewCapital, connection);
+                string sqlInsertQuery = "INSERT " + tableName + " VALUES ('" + record + "')";
+                command = new SqlCommand(sqlInsertQuery, connection);
                 command.ExecuteNonQuery();
 
-                command = new SqlCommand(sqlSelectCapital, connection);
+                command = new SqlCommand(sqlSelectQuery, connection);
                 reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    idCapital = reader.GetValue(0);
-                }
             }
 
-            string sqlSelectRegion = "SELECT Regions.Id FROM Regions WHERE Regions.Name = '" + region + "'";
+            while (reader.Read())
+            {
+                id = reader.GetValue(0);
+            }
+
+            reader.Close();
+        }
+
+        public void AddCountryInfoToDatabase(string name, string countryCode, string capital, string area, string population, string region)
+        {
+            string tableNameCapitals = "Capitals";
+            object idCapital = null;
+
+            AddRecordToSingleTable(tableNameCapitals, capital, ref idCapital);
+
+            string tableNameRegion = "Regions";
             object idRegion = null;
 
-            command = new SqlCommand(sqlSelectRegion, connection);
-            reader = command.ExecuteReader();
+            AddRecordToSingleTable(tableNameRegion, region, ref idRegion);
+
+            string sqlSelectCountryCode = "SELECT Countries.Id FROM Countries WHERE Countries.CountryCode = '" + countryCode + "'";
+
+            SqlCommand command = new SqlCommand(sqlSelectCountryCode, connection);
+            SqlDataReader reader = command.ExecuteReader();
 
             if (!reader.HasRows)
             {
-                string sqlInsertNewCapital = "INSERT Regions VALUES ('" + region + "')";
-                /*     Console.WriteLine("{0}", reader.GetName(0));
-
-                     while (reader.Read())
-                     {
-                         object id = reader.GetValue(0);
-
-                         Console.WriteLine("{0}", id);
-                     }*/
+                reader.Close();
+                string sqlInsertNewCountry = "INSERT Countries VALUES ('" + name + "'), " +
+                    "('" + countryCode + "'), " +
+                    "('" + idCapital.ToString() + "'), " +
+                    "('" + area + "'), " +
+                    "('" + population + "'), " +
+                    "('" + idRegion.ToString() + "')";
+                command = new SqlCommand(sqlInsertNewCountry, connection);
+                command.ExecuteNonQuery();
             }
             else
             {
-                while (reader.Read())
-                {
-                    idRegion = reader.GetValue(0);
-                }
+                reader.Close();
+                string sqlUpdateCountry = "UPDATE Countries SET Name = '" + name + 
+                    "', Capital = '" + idCapital.ToString() + 
+                    "', Area = '" + area + 
+                    "', Population = '" + population + 
+                    "', Region = '" + idRegion.ToString() + "'" +
+                    "WHERE CountryCode = '" + countryCode + "'";
+                command = new SqlCommand(sqlUpdateCountry, connection);
+                command.ExecuteNonQuery();
             }
-
-
-
-            reader.Close();
         }
 
         public void CloseConnection()
