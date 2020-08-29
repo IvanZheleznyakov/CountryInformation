@@ -1,9 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CountryInfoApplication
 {
+    /// <summary>
+    /// Вспомогательный класс для десериализации JSON.
+    /// </summary>
+    public class RestCountriesJSONClass
+    {
+        public List<ArrayOfJSON> ArrayOfJSON { get; set; }
+    }
+
+    /// <summary>
+    /// Вспомогательный класс для десериализации JSON.
+    /// </summary>
     public class Currency
     {
         public string Code { get; set; }
@@ -11,6 +20,9 @@ namespace CountryInfoApplication
         public string Symbol { get; set; }
     }
 
+    /// <summary>
+    /// Вспомогательный класс для десериализации JSON.
+    /// </summary>
     public class Language
     {
         public string Iso639_1 { get; set; }
@@ -19,6 +31,9 @@ namespace CountryInfoApplication
         public string NativeName { get; set; }
     }
 
+    /// <summary>
+    /// Вспомогательный класс для десериализации JSON.
+    /// </summary>
     public class Translations
     {
         public string De { get; set; }
@@ -33,6 +48,9 @@ namespace CountryInfoApplication
         public string Fa { get; set; }
     }
 
+    /// <summary>
+    /// Вспомогательный класс для десериализации JSON.
+    /// </summary>
     public class ArrayOfJSON
     {
         public string Name { get; set; }
@@ -59,10 +77,5 @@ namespace CountryInfoApplication
         public string Flag { get; set; }
         public List<object> RegionalBlocs { get; set; }
         public string Cioc { get; set; }
-    }
-
-    public class RestCountriesJSONClass
-    {
-        public List<ArrayOfJSON> ArrayOfJSON { get; set; }
     }
 }

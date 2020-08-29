@@ -1,11 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Data.SqlClient;
-using System.IO;
-using System.Net;
-using System.Configuration;
-
-namespace CountryInfoApplication
+﻿namespace CountryInfoApplication
 {
     class Program
     {

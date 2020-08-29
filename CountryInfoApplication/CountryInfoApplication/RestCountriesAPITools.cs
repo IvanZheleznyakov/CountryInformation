@@ -1,10 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Data.Common;
 using System.IO;
 using System.Net;
-using System.Text;
 
 namespace CountryInfoApplication
 {
