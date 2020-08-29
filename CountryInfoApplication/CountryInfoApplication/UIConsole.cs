@@ -26,14 +26,14 @@ namespace CountryInfoApplication
 
         private void PrintNameOfColumns()
         {
-            Console.WriteLine("{0,10}   |{1,10}   |{2,10}   |{3,10}   |{4,10}   |{5,10}", "Название", "Код страны", "Столица", "Площадь", "Население", "Регион");
+            Console.WriteLine("{0,30}   |{1,10}   |{2,10}   |{3,10}   |{4,10}   |{5,10}", "Название", "Код страны", "Столица", "Площадь", "Население", "Регион");
             Console.WriteLine("======================================================");
         }
 
         private void ShowCountryInfo(List<string> countryInfo)
         {
             PrintNameOfColumns();
-            Console.WriteLine("{0,10}   |{1,10}   |{2,10}   |{3,10}   |{4,10}   |{5,10}", countryInfo[0], countryInfo[1], countryInfo[2], countryInfo[3], countryInfo[4], countryInfo[5]);
+            Console.WriteLine("{0,30}   |{1,10}   |{2,10}   |{3,10}   |{4,10}   |{5,10}", countryInfo[0], countryInfo[1], countryInfo[2], countryInfo[3], countryInfo[4], countryInfo[5]);
         }
 
         public void RunApplication()
@@ -75,6 +75,8 @@ namespace CountryInfoApplication
                         }
 
                         int saveData;
+                        PrintSaveDataRequest();
+
                         while (!Int32.TryParse(Console.ReadLine(), out saveData) && (saveData != 0 || saveData != 1))
                         {
                             Console.WriteLine("Такой операции нет. Введите целое число - номер операции. \n");
@@ -96,6 +98,8 @@ namespace CountryInfoApplication
                         break;
                 }
             }
+
+            databaseTools.CloseConnection();
 
             Console.WriteLine("Подключение закрыто...");
         }

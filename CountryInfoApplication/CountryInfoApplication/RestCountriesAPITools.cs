@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -22,13 +23,15 @@ namespace CountryInfoApplication
                 string myJsonResponse;
                 if ((myJsonResponse = stream.ReadLine()) != null)
                 {
+                    myJsonResponse = myJsonResponse.Remove(0, 1);
+                    myJsonResponse = myJsonResponse.Remove(myJsonResponse.Length - 1, 1);
                     RestCountriesJSONClass myDeserializedClass = JsonConvert.DeserializeObject<RestCountriesJSONClass>(myJsonResponse);
-                    result.Add(myDeserializedClass.CountryInfo.name);
-                    result.Add(myDeserializedClass.CountryInfo.alpha2Code);
-                    result.Add(myDeserializedClass.CountryInfo.capital);
-                    result.Add(myDeserializedClass.CountryInfo.area.ToString());
-                    result.Add(myDeserializedClass.CountryInfo.population.ToString());
-                    result.Add(myDeserializedClass.CountryInfo.region);
+                    result.Add(myDeserializedClass.name);
+                    result.Add(myDeserializedClass.alpha2Code);
+                    result.Add(myDeserializedClass.capital);
+                    result.Add(myDeserializedClass.area.ToString());
+                    result.Add(myDeserializedClass.population.ToString());
+                    result.Add(myDeserializedClass.region);
                 }
             }
 

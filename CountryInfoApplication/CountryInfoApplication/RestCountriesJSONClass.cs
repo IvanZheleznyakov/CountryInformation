@@ -33,7 +33,15 @@ namespace CountryInfoApplication
         public string fa { get; set; }
     }
 
-    public class CountryInfo
+    public class RegionalBloc
+    {
+        public string acronym { get; set; }
+        public string name { get; set; }
+        public List<string> otherAcronyms { get; set; }
+        public List<object> otherNames { get; set; }
+    }
+
+    public class RestCountriesJSONClass
     {
         public string name { get; set; }
         public List<string> topLevelDomain { get; set; }
@@ -57,14 +65,8 @@ namespace CountryInfoApplication
         public List<Language> languages { get; set; }
         public Translations translations { get; set; }
         public string flag { get; set; }
-        public List<object> regionalBlocs { get; set; }
+        public List<RegionalBloc> regionalBlocs { get; set; }
         public string cioc { get; set; }
     }
-
-    public class RestCountriesJSONClass
-    {
-        public CountryInfo CountryInfo { get; set; }
-    }
-
 
 }

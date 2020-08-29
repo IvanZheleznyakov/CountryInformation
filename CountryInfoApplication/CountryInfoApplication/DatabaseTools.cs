@@ -31,7 +31,7 @@ namespace CountryInfoApplication
 
         private void AddRecordToSingleTable(string tableName, string record, ref object id)
         {
-            string sqlSelectQuery = "SELECT" + tableName + ".Id FROM " + tableName + " WHERE " + tableName + ".Name = '" + record + "'";
+            string sqlSelectQuery = "SELECT " + tableName + ".Id FROM " + tableName + " WHERE " + tableName + ".Name = '" + record + "'";
 
             SqlCommand command = new SqlCommand(sqlSelectQuery, connection);
             SqlDataReader reader = command.ExecuteReader();
@@ -75,12 +75,12 @@ namespace CountryInfoApplication
             if (!reader.HasRows)
             {
                 reader.Close();
-                string sqlInsertNewCountry = "INSERT Countries VALUES ('" + name + "'), " +
-                    "('" + countryCode + "'), " +
-                    "('" + idCapital.ToString() + "'), " +
-                    "('" + area + "'), " +
-                    "('" + population + "'), " +
-                    "('" + idRegion.ToString() + "')";
+                string sqlInsertNewCountry = "INSERT Countries VALUES ('" + name + "', " +
+                    "'" + countryCode + "', " +
+                    "'" + idCapital.ToString() + "', " +
+                    "'" + area + "', " +
+                    "'" + population + "', " +
+                    "'" + idRegion.ToString() + "')";
                 command = new SqlCommand(sqlInsertNewCountry, connection);
                 command.ExecuteNonQuery();
             }
