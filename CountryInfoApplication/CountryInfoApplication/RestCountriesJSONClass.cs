@@ -68,5 +68,4 @@ namespace CountryInfoApplication
         public List<RegionalBloc> RegionalBlocs { get; set; }
         public string Cioc { get; set; }
     }
-
 }

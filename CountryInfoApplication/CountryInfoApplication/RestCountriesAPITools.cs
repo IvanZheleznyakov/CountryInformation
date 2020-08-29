@@ -14,9 +14,19 @@ namespace CountryInfoApplication
         {
             WebRequest request = WebRequest.Create("https://restcountries.eu/rest/v2/name/" + country);
 
-            WebResponse response = request.GetResponse();
-
             List<string> result = new List<string>();
+
+            WebResponse response;
+
+            try
+            {
+                response = request.GetResponse();
+            }
+            catch (WebException exception)
+            {
+                Console.WriteLine(exception.Message);
+                return result;
+            }
 
             using (StreamReader stream = new StreamReader(response.GetResponseStream()))
             {

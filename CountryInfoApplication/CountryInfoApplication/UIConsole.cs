@@ -7,6 +7,11 @@ namespace CountryInfoApplication
 {
     class UIConsole
     {
+        private void PrintDividingLine()
+        {
+            Console.WriteLine("================================================================================================================");
+        }
+
         private void PrintMenu()
         {
             Console.WriteLine("Список доступных операций: \n" +
@@ -27,13 +32,20 @@ namespace CountryInfoApplication
         private void PrintNameOfColumns()
         {
             Console.WriteLine("{0,30}   |{1,10}   |{2,10}   |{3,10}   |{4,10}   |{5,10}", "Название", "Код страны", "Столица", "Площадь", "Население", "Регион");
-            Console.WriteLine("======================================================");
+            PrintDividingLine();
         }
 
-        private void ShowCountryInfo(List<string> countryInfo)
+        private void PrintCountryInfo(List<string> countryInfo)
         {
-            PrintNameOfColumns();
             Console.WriteLine("{0,30}   |{1,10}   |{2,10}   |{3,10}   |{4,10}   |{5,10}", countryInfo[0], countryInfo[1], countryInfo[2], countryInfo[3], countryInfo[4], countryInfo[5]);
+        }
+
+        private void PrintRecordsFromDataBase(List<List<string>> recordsFromDatabase)
+        {
+            foreach (var record in recordsFromDatabase)
+            {
+                PrintCountryInfo(record);
+            }
         }
 
         public void RunApplication()
@@ -41,8 +53,11 @@ namespace CountryInfoApplication
             var databaseTools = new DatabaseTools();
             if (!databaseTools.ConnectToSQLServer())
             {
+                Console.WriteLine("Проверьте файл конфигурации.");
                 return;
             }
+
+            Console.WriteLine("Подключение с базой данных открыто. Можете начинать работу.");
 
             var apiTools = new RestCountriesAPITools();
 
@@ -53,7 +68,9 @@ namespace CountryInfoApplication
 
                 while (!Int32.TryParse(Console.ReadLine(), out operation))
                 {
-                    Console.WriteLine("Ошибка ввода данных! Запрос должен являться целым числом. \n");
+                    PrintDividingLine();
+                    Console.WriteLine("Ошибка ввода данных! Запрос должен являться целым числом.");
+                    PrintDividingLine();
                     PrintMenu();
                 }
 
@@ -67,18 +84,23 @@ namespace CountryInfoApplication
 
                         if (countryInfo.Count == 0)
                         {
-                            Console.WriteLine("Страна с таким названием не найдена.");
+                            PrintDividingLine();
+                            Console.WriteLine("Страна с таким названием не найдена, или, возможно, какая-то проблема с API RestCountries.");
+                            PrintDividingLine();
                         }
                         else
                         {
-                            ShowCountryInfo(countryInfo);
+                            PrintNameOfColumns();
+                            PrintCountryInfo(countryInfo);
 
                             int saveData;
                             PrintSaveDataRequest();
 
                             while (!Int32.TryParse(Console.ReadLine(), out saveData) && (saveData != 0 || saveData != 1))
                             {
-                                Console.WriteLine("Такой операции нет. Введите целое число - номер операции. \n");
+                                PrintDividingLine();
+                                Console.WriteLine("Такой операции нет. Введите целое число - номер операции.");
+                                PrintDividingLine();
                                 PrintSaveDataRequest();
                             }
 
@@ -90,12 +112,25 @@ namespace CountryInfoApplication
 
                         break;
                     case 2:
-
+                        List<List<string>> recordsFromDataBase = databaseTools.GetRecordsFromDatabase();
+                        if (recordsFromDataBase.Count == 0)
+                        {
+                            PrintDividingLine();
+                            Console.WriteLine("На данный момент в базе данных нет записей.");
+                            PrintDividingLine();
+                        }
+                        else
+                        {
+                            PrintNameOfColumns();
+                            PrintRecordsFromDataBase(recordsFromDataBase);
+                        }
                         break;
                     case 0:
                         break;
                     default:
+                        PrintDividingLine();
                         Console.WriteLine("Данной операции нет в списке. Попробуйте еще раз. \n");
+                        PrintDividingLine();
                         break;
                 }
             }
