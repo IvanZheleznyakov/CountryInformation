@@ -87,6 +87,11 @@ namespace CountryInfoApplication
                 name = name.Replace(")", "");
             }
 
+            if (area.Contains(","))
+            {
+                area = area.Replace(",", ".");
+            }
+
             string sqlSelectCountryCode = "SELECT Countries.Id FROM Countries WHERE Countries.CountryCode = '" + countryCode + "'";
 
             SqlCommand command = new SqlCommand(sqlSelectCountryCode, connection);
