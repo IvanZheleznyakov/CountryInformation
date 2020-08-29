@@ -72,24 +72,25 @@ namespace CountryInfoApplication
                         else
                         {
                             ShowCountryInfo(countryInfo);
-                        }
 
-                        int saveData;
-                        PrintSaveDataRequest();
-
-                        while (!Int32.TryParse(Console.ReadLine(), out saveData) && (saveData != 0 || saveData != 1))
-                        {
-                            Console.WriteLine("Такой операции нет. Введите целое число - номер операции. \n");
+                            int saveData;
                             PrintSaveDataRequest();
-                        }
 
-                        if (saveData == 1)
-                        {
-                            databaseTools.AddCountryInfoToDatabase(countryInfo[0], countryInfo[1], countryInfo[2], countryInfo[3], countryInfo[4], countryInfo[5]);
+                            while (!Int32.TryParse(Console.ReadLine(), out saveData) && (saveData != 0 || saveData != 1))
+                            {
+                                Console.WriteLine("Такой операции нет. Введите целое число - номер операции. \n");
+                                PrintSaveDataRequest();
+                            }
+
+                            if (saveData == 1)
+                            {
+                                databaseTools.AddCountryInfoToDatabase(countryInfo[0], countryInfo[1], countryInfo[2], countryInfo[3], countryInfo[4], countryInfo[5]);
+                            }
                         }
 
                         break;
                     case 2:
+
                         break;
                     case 0:
                         break;

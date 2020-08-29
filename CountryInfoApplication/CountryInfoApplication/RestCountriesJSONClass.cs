@@ -6,67 +6,67 @@ namespace CountryInfoApplication
 {
     public class Currency
     {
-        public string code { get; set; }
-        public string name { get; set; }
-        public string symbol { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
+        public string Symbol { get; set; }
     }
 
     public class Language
     {
-        public string iso639_1 { get; set; }
-        public string iso639_2 { get; set; }
-        public string name { get; set; }
-        public string nativeName { get; set; }
+        public string Iso639_1 { get; set; }
+        public string Iso639_2 { get; set; }
+        public string Name { get; set; }
+        public string NativeName { get; set; }
     }
 
     public class Translations
     {
-        public string de { get; set; }
-        public string es { get; set; }
-        public string fr { get; set; }
-        public string ja { get; set; }
-        public string it { get; set; }
-        public string br { get; set; }
-        public string pt { get; set; }
-        public string nl { get; set; }
-        public string hr { get; set; }
-        public string fa { get; set; }
+        public string De { get; set; }
+        public string Es { get; set; }
+        public string Fr { get; set; }
+        public string Ja { get; set; }
+        public string It { get; set; }
+        public string Br { get; set; }
+        public string Pt { get; set; }
+        public string Nl { get; set; }
+        public string Hr { get; set; }
+        public string Fa { get; set; }
     }
 
     public class RegionalBloc
     {
-        public string acronym { get; set; }
-        public string name { get; set; }
-        public List<string> otherAcronyms { get; set; }
-        public List<object> otherNames { get; set; }
+        public string Acronym { get; set; }
+        public string Name { get; set; }
+        public List<string> OtherAcronyms { get; set; }
+        public List<object> OtherNames { get; set; }
     }
 
     public class RestCountriesJSONClass
     {
-        public string name { get; set; }
-        public List<string> topLevelDomain { get; set; }
-        public string alpha2Code { get; set; }
-        public string alpha3Code { get; set; }
-        public List<string> callingCodes { get; set; }
-        public string capital { get; set; }
-        public List<string> altSpellings { get; set; }
-        public string region { get; set; }
-        public string subregion { get; set; }
-        public int population { get; set; }
-        public List<double> latlng { get; set; }
-        public string demonym { get; set; }
-        public double area { get; set; }
-        public double gini { get; set; }
-        public List<string> timezones { get; set; }
-        public List<string> borders { get; set; }
-        public string nativeName { get; set; }
-        public string numericCode { get; set; }
-        public List<Currency> currencies { get; set; }
-        public List<Language> languages { get; set; }
-        public Translations translations { get; set; }
-        public string flag { get; set; }
-        public List<RegionalBloc> regionalBlocs { get; set; }
-        public string cioc { get; set; }
+        public string Name { get; set; }
+        public List<string> TopLevelDomain { get; set; }
+        public string Alpha2Code { get; set; }
+        public string Alpha3Code { get; set; }
+        public List<string> CallingCodes { get; set; }
+        public string Capital { get; set; }
+        public List<string> AltSpellings { get; set; }
+        public string Region { get; set; }
+        public string Subregion { get; set; }
+        public int Population { get; set; }
+        public List<double> Latlng { get; set; }
+        public string Demonym { get; set; }
+        public double Area { get; set; }
+        public double Gini { get; set; }
+        public List<string> Timezones { get; set; }
+        public List<string> Borders { get; set; }
+        public string NativeName { get; set; }
+        public string NumericCode { get; set; }
+        public List<Currency> Currencies { get; set; }
+        public List<Language> Languages { get; set; }
+        public Translations Translations { get; set; }
+        public string Flag { get; set; }
+        public List<RegionalBloc> RegionalBlocs { get; set; }
+        public string Cioc { get; set; }
     }
 
 }

@@ -26,12 +26,12 @@ namespace CountryInfoApplication
                     myJsonResponse = myJsonResponse.Remove(0, 1);
                     myJsonResponse = myJsonResponse.Remove(myJsonResponse.Length - 1, 1);
                     RestCountriesJSONClass myDeserializedClass = JsonConvert.DeserializeObject<RestCountriesJSONClass>(myJsonResponse);
-                    result.Add(myDeserializedClass.name);
-                    result.Add(myDeserializedClass.alpha2Code);
-                    result.Add(myDeserializedClass.capital);
-                    result.Add(myDeserializedClass.area.ToString());
-                    result.Add(myDeserializedClass.population.ToString());
-                    result.Add(myDeserializedClass.region);
+                    result.Add(myDeserializedClass.Name);
+                    result.Add(myDeserializedClass.Alpha2Code);
+                    result.Add(myDeserializedClass.Capital);
+                    result.Add(myDeserializedClass.Area.ToString());
+                    result.Add(myDeserializedClass.Population.ToString());
+                    result.Add(myDeserializedClass.Region);
                 }
             }
 
