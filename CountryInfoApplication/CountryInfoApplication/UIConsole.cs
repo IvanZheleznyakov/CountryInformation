@@ -5,6 +5,9 @@ using System.Text;
 
 namespace CountryInfoApplication
 {
+    /// <summary>
+    /// Класс для взаимодействия с пользователем через консоль.
+    /// </summary>
     public class UIConsole
     {
         private void PrintDividingLine()
@@ -49,6 +52,9 @@ namespace CountryInfoApplication
             }
         }
 
+        /// <summary>
+        /// Запуск приложения.
+        /// </summary>
         public void RunApplication()
         {
             var databaseTools = new DatabaseTools();

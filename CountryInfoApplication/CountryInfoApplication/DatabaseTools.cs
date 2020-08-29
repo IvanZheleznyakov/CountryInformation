@@ -6,9 +6,16 @@ using System.Text;
 
 namespace CountryInfoApplication
 {
+    /// <summary>
+    /// Класс для взаимодействия с сервером БД.
+    /// </summary>
     public class DatabaseTools
     {
         private SqlConnection connection;
+        /// <summary>
+        /// Установка соединения.
+        /// </summary>
+        /// <returns>Булевая переменная - успешно ли произведено соединение.</returns>
         public bool ConnectToSQLServer()
         {
             string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
@@ -53,6 +60,15 @@ namespace CountryInfoApplication
             reader.Close();
         }
 
+        /// <summary>
+        /// Добавление информации о стране в базу данных.
+        /// </summary>
+        /// <param name="name">Название страны.</param>
+        /// <param name="countryCode">Код страны.</param>
+        /// <param name="capital">Столица.</param>
+        /// <param name="area">Площадь.</param>
+        /// <param name="population">Население.</param>
+        /// <param name="region">Регион.</param>
         public void AddCountryInfoToDatabase(string name, string countryCode, string capital, string area, string population, string region)
         {
             string tableNameCapitals = "Capitals";
@@ -103,6 +119,10 @@ namespace CountryInfoApplication
             }
         }
 
+        /// <summary>
+        /// Получение текущей информации о странах в БД.
+        /// </summary>
+        /// <returns>Список из List<string>, каждый из которых содержит информации об одной стране.</returns>
         public List<List<string>> GetRecordsFromDatabase()
         {
             List<List<string>> result = new List<List<string>>();
@@ -133,6 +153,9 @@ namespace CountryInfoApplication
             return result;
         }
 
+        /// <summary>
+        /// Закрытие соединения.
+        /// </summary>
         public void CloseConnection()
         {
             connection.Close();

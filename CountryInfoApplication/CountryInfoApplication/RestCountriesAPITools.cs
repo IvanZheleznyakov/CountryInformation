@@ -8,8 +8,16 @@ using System.Text;
 
 namespace CountryInfoApplication
 {
+    /// <summary>
+    /// Класс для взаимодействия с API RestCountries.
+    /// </summary>
     public class RestCountriesAPITools
     {
+        /// <summary>
+        /// Получение информации о стране.
+        /// </summary>
+        /// <param name="country">Полное название страны.</param>
+        /// <returns>Список, в котором содержится информация. Пустой, если запрос не удался.</returns>
         public List<string> GetCountryInfo(string country)
         {
             WebRequest request = WebRequest.Create("https://restcountries.eu/rest/v2/name/" + country + "?fullText=true");
